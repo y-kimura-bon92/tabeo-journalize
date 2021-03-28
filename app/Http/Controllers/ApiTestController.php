@@ -89,4 +89,8 @@ class ApiTestController extends Controller
         return view('post.calender');
     }
 
+    public function sample() {
+        return view('sample.view');
+    }
+
 }

@@ -15,3 +15,4 @@ Route::get('/show', 'PostController@show')->name('show');
 Route::get('/api','ApiTestController@test');
 Route::get('/calender','ApiTestController@calender')->name('calender');
 Route::get('/google_calendar','ApiTestController@google_calendar')->name('google_calendar');
+Route::get('/sample','ApiTestController@sample')->name('sample');
