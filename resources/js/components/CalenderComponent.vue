@@ -1,6 +1,10 @@
 <template>
   <div>
 
+    <div id="form-modal">
+      <create-component ref="form" @save="saveEvent"></create-component>
+    </div>
+
     <v-menu bottom right>
       <template v-slot:activator="{ on }">
         <v-btn
@@ -36,6 +40,7 @@
           :events="events"
           color="primary"
           @click:date="showDay"
+          @click:day="createEvent"
       ></v-calendar>
     </v-sheet>
   </div>
@@ -71,6 +76,14 @@
       showDay({date}) {
         this.today = date;
         this.type = 'day';
+      }
+      createEvent({date}){
+        this.$refs.form.open(date);
+      }
+      saveEvent(params){
+        console.log("calendarcompoennt.xue");
+        this.events.push(params);
+        console.log(`保存しました。${params}`)
       }
     }
   }

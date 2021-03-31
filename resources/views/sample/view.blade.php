@@ -1,4 +1,13 @@
 <!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+</head>
+<body>
+    <a href="http://kachibon.work/tabeo-journalize/public/auth/redirect"><button>Googleでログイン</button></a>
+</body>
+</html>
+{{-- <!DOCTYPE html>
 <html lang="{{ str_replace('_', '-', app()->getLocale()) }}">
   <head>
     <meta charset="utf-8">
@@ -33,5 +42,5 @@
 
   <script src="{{ asset('js/app.js')}}"></script>
   {{-- <script src="{{ mix('/js/app.js') }}"></script> --}}
-  </body>
-</html>
+  {{-- </body> --}}
+{{-- </html> --}} 

@@ -18,7 +18,7 @@ class CreateBlogsTable extends Migration
             $table->string('image_path', 100);
             $table->string('receiptimage_path', 100);
             $table->text('weather');
-            $table->integer('plice')
+            $table->integer('plice');
             $table->bigIncrements('id');
             $table->timestamps();
         });

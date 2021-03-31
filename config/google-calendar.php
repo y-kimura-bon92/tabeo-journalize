@@ -14,7 +14,7 @@ return [
              * Path to the json file containing the credentials.
              */
             // 'credentials_json' => storage_path('app/google-calendar/service-account-credentials.json'),
-            'credentials_json' => storage_path('app/api-key/tabeo-journalize-285589c12b93.json'),
+            'credentials_json' => storage_path('/app/api-key/tabeo-journalize-285589c12b93.json'),
             // 'service_account_credentials_json' => storage_path('app/api-key/tabeo-journalize-285589c12b93.json'),
         ],
 

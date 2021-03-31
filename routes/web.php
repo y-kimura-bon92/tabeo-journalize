@@ -10,6 +10,11 @@
 | contains the "web" middleware group. Now create something great!
 |
 */
+
+Route::get('/','CalendarController@index');
+Route::get('/recording', 'CalendarController@getRecording')->name('getRecording');
+Route::post('/recording', 'CalendarController@postRecording')->name('postRecording');
+
 Route::get('/show', 'PostController@show')->name('show');
 
 Route::get('/api','ApiTestController@test');
