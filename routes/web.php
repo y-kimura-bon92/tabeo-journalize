@@ -12,8 +12,10 @@
 */
 
 Route::get('/','CalendarController@index');
+Route::get('/recording/{id}','CalendarController@getRecordingId')->name('getRecordingId');
 Route::get('/recording', 'CalendarController@getRecording')->name('getRecording');
 Route::post('/recording', 'CalendarController@postRecording')->name('postRecording');
+Route::delete('/recording','CalendarController@deleteRecording')->name('deleteRecording');
 
 Route::get('/show', 'PostController@show')->name('show');
 

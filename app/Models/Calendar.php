@@ -27,17 +27,30 @@ class Calendar
     // 日曜日からカレンダーを表示するため前月の余った日付をループの初期値にする
     $day = 1 - $firstWeekDay;
 
+    // 前月
+    $prev = strtotime('-1 month',mktime(0, 0, 0, $month, 1, $year));
+    $prev_year = date("Y",$prev);
+    $prev_month = date("m",$prev);
+    // 翌月
+    $next = strtotime('+1 month',mktime(0, 0, 0, $month, 1, $year));
+    $next_year = date("Y",$next);
+    $next_month = date("m",$next);
+
     $this->html = <<< EOS
-    <h1>{$year}年{$month}月</h1>
+    <h1>
+      <a class="btn btn-primary" href="http://kachibon.work/tabeo-journalize/public/?year={$prev_year}&month={$prev_month}" role="button">&lt;前月</a>
+      {$year}年{$month}月
+      <a class="btn btn-primary" href="http://kachibon.work/tabeo-journalize/public/?year={$next_year}&month={$next_month}" role="button">翌月&gt;</a>
+    </h1>
     <table class="table table-bordered">
     <tr>
-      <th scope="col">日</th>
-      <th scope="col">月</th>
-      <th scope="col">火</th>
-      <th scope="col">水</th>
-      <th scope="col">木</th>
-      <th scope="col">金</th>
-      <th scope="col">土</th>
+      <th class="text-center" scope="col">日</th>
+      <th class="text-center" scope="col">月</th>
+      <th class="text-center" scope="col">火</th>
+      <th class="text-center" scope="col">水</th>
+      <th class="text-center" scope="col">木</th>
+      <th class="text-center" scope="col">金</th>
+      <th class="text-center" scope="col">土</th>
     </tr>
     EOS;
 
@@ -48,13 +61,14 @@ class Calendar
       for ($i = 0; $i < 7; $i++) {
           if ($day <= 0 || $day > $lastDay) {
               // 先月・来月の日付の場合
-              $this->html .= "<td>&nbsp;</td>";
+              $this->html .= "<td style='background-color: #f9f9f9;'></td>";
           } else {
-            $this->html .= "<td>" . $day ."&nbsp"; 
+            $this->html .= "<td style='height: 75px;'>" . $day; 
               $target = date("Y-m-d", mktime(0, 0, 0, $month, $day, $year)); 
                 foreach($this->recording as $val) {
                   if ($val->day == $target) {
-                    $this->html .= $val->description; 
+                    // $this->html .= "<br><span class='text-center' style='display: block;'>".$val->description."</span>"; 
+                    $this->html .= "<br><span class='text-center text-success' style='display: block;'>●</span>"; 
                     break;
                   }
                 }
