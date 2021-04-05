@@ -67,8 +67,7 @@ class Calendar
               $target = date("Y-m-d", mktime(0, 0, 0, $month, $day, $year)); 
                 foreach($this->recording as $val) {
                   if ($val->day == $target) {
-                    // $this->html .= "<br><span class='text-center' style='display: block;'>".$val->description."</span>"; 
-                    $this->html .= "<br><span class='text-center text-success' style='display: block;'>●</span>"; 
+                    $this->html .= "<br><a href='https://kachibon.work/tabeo-journalize/public/datails/{$val->id}' class='text-center text-success' style='display: block;'>●</a>";
                     break;
                   }
                 }

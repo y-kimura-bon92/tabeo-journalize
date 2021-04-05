@@ -8,7 +8,7 @@ use App\Models\Calendar;
 
 class CalendarController extends Controller
 {
-    //
+    // カレンダーデータの作成画面
     public function getRecording(Request $request) {
         $data = new Calendar_Recording();
         // カレンダーの内容データ取得
@@ -16,6 +16,7 @@ class CalendarController extends Controller
         return view('calendar.recording', ['list' => $list, 'data' => $data]);
     }
 
+    // カレンダーデータの作成画面 一覧表示
     public function getRecordingId($id) {
         // カレンダーの内容データ取得
         $data = new Calendar_Recording();
@@ -26,6 +27,9 @@ class CalendarController extends Controller
         return view('calendar.recording', ['list' => $list, 'data' => $data]);
     }
 
+
+
+    // カレンダーデータの新規登録画面のPOST処理
     public function postRecording(Request $request) {
         // バリデーション
         $validatedData = $request->validate([
@@ -55,6 +59,7 @@ class CalendarController extends Controller
 
 
 
+    // カレンダー画面
     public function index(Request $request) {
         $list = Calendar_Recording::all();
         $calendar = new Calendar($list);
@@ -62,6 +67,33 @@ class CalendarController extends Controller
 
         return view('calendar.index', ['cal_tag' => $tag]);
     }
+
+
+
+    // カレンダーデータ編集画面
+    public function getDatails($id) {
+        $calendars_id = Calendar_Recording::find($id);
+        // dd($calendars_id);
+
+        return view('calendar.datails', ['calendars_id' => $calendars_id]);
+    }
+
+
+
+    public function postUpdate(Request $request) {
+        $inputs = $request->all();
+        $update_calendar = Calendar_Recording::find($inputs['id']);
+        $update_calendar->fill([
+            'day'         => $inputs['day'],
+            'description' => $inputs['description'],
+        ]);
+        $update_calendar->save();
+        \Session::flash('err_msg', 'データを更新しました');
+        return redirect(route('getDatails', ['id' => $inputs['id'],]));
+    }
+
+
+
 
 
 
