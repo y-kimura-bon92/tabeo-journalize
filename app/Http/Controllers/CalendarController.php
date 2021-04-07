@@ -41,12 +41,17 @@ class CalendarController extends Controller
         if(isset($request->id)) {
             $recording = Calendar_Recording::where('id', '=', $request->id)->first();
             $recording->day         = $request->day;
+            $recording->title       = $request->title;
             $recording->description = $request->description;
+
             $recording->save();
         } else {
             $recording = new Calendar_Recording();
             $recording->day         = $request->day;
+            $recording->title       = $request->title;
             $recording->description = $request->description;
+            $recording->food_file_name = 'cnt=0';
+            $recording->food_file_path = 'cnt=0';
             
             $recording->save();
         }
@@ -83,12 +88,25 @@ class CalendarController extends Controller
     public function postUpdate(Request $request) {
         $inputs = $request->all();
         $update_calendar = Calendar_Recording::find($inputs['id']);
-        $update_calendar->fill([
-            'day'         => $inputs['day'],
-            'description' => $inputs['description'],
-        ]);
-        $update_calendar->save();
-        \Session::flash('err_msg', 'データを更新しました');
+
+        // 選択された画像を取得
+        $update_image    = $request->file('food_image');
+        $path    = $update_image->store('temp',"public");
+
+        //アップロードされた画像をtempディレクトリに保存する
+        if($update_calendar) {
+            $update_calendar->fill([
+                'day'            => $inputs['day'],
+                'food_file_name' => $inputs['food_image']->getClientOriginalName(),
+                'food_file_path' => $path,
+                'title'          => $inputs['title'],
+                'description'    => $inputs['description'],
+            ]);
+
+            $update_calendar->save();
+            \Session::flash('err_msg', 'データを更新しました');
+        }
+        
         return redirect(route('getDatails', ['id' => $inputs['id'],]));
     }
 

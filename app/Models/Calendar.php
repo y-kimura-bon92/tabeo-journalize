@@ -38,9 +38,9 @@ class Calendar
 
     $this->html = <<< EOS
     <h1>
-      <a class="btn btn-primary" href="http://kachibon.work/tabeo-journalize/public/?year={$prev_year}&month={$prev_month}" role="button">&lt;前月</a>
+      <a class="btn btn-primary" href="https://kachibon.work/tabeo-journalize/public/?year={$prev_year}&month={$prev_month}" role="button">&lt;前月</a>
       {$year}年{$month}月
-      <a class="btn btn-primary" href="http://kachibon.work/tabeo-journalize/public/?year={$next_year}&month={$next_month}" role="button">翌月&gt;</a>
+      <a class="btn btn-primary" href="https://kachibon.work/tabeo-journalize/public/?year={$next_year}&month={$next_month}" role="button">翌月&gt;</a>
     </h1>
     <table class="table table-bordered">
     <tr>
@@ -61,13 +61,13 @@ class Calendar
       for ($i = 0; $i < 7; $i++) {
           if ($day <= 0 || $day > $lastDay) {
               // 先月・来月の日付の場合
-              $this->html .= "<td style='background-color: #f9f9f9;'></td>";
+              $this->html .= "<td style='background-color: #eee;'></td>";
           } else {
             $this->html .= "<td style='height: 75px;'>" . $day; 
               $target = date("Y-m-d", mktime(0, 0, 0, $month, $day, $year)); 
                 foreach($this->recording as $val) {
                   if ($val->day == $target) {
-                    $this->html .= "<br><a href='https://kachibon.work/tabeo-journalize/public/datails/{$val->id}' class='text-center text-success' style='display: block;'>●</a>";
+                    $this->html .= "<br><a href='https://kachibon.work/tabeo-journalize/public/datails/{$val->id}' class='text-center bg-success' style='display: block;'>　</a>";
                     break;
                   }
                 }

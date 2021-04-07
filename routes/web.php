@@ -11,13 +11,16 @@
 |
 */
 
-Route::get('/','CalendarController@index');
+Route::get('/','CalendarController@index')->name('index');
 Route::get('/recording/{id}','CalendarController@getRecordingId')->name('getRecordingId');
 Route::get('/recording', 'CalendarController@getRecording')->name('getRecording');
 Route::post('/recording', 'CalendarController@postRecording')->name('postRecording');
 Route::delete('/recording','CalendarController@deleteRecording')->name('deleteRecording');
 Route::get('/datails/{id}', 'CalendarController@getDatails')->name('getDatails');
 Route::post('/update', 'CalendarController@postUpdate')->name('postUpdate');
+
+Route::get('business_card', 'BusinessCardController@index');
+Route::post('business_card/extract', 'BusinessCardController@extract');
 
 Route::get('/show', 'PostController@show')->name('show');
 
